@@ -72,7 +72,13 @@ yellow: #eee978
       </div>
     </div>
     <div class="control-row">
-      
+      <span>
+        <input type="checkbox" />
+      </span>
+      <span>Last</span>
+      <span>First</span>
+      <span>#</span>
+      <span>Type</span>
     </div>
     <div v-for="(contact, index) in contacts" :key="index">
       <ul>
