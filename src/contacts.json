@@ -1,0 +1,42 @@
+[
+  {
+    "first_name": "Mac",
+    "last_name": "Jones",
+    "number": "904-555-1010",
+    "personal_contact": false,
+    "work_contact": true,
+    "notes": "Great QB. Strong arm, great decision maker."
+  },
+  {
+    "first_name": "Dont'a",
+    "last_name": "Hightower",
+    "number": "904-555-5454",
+    "personal_contact": false,
+    "work_contact": true,
+    "notes": ""
+  },
+  {
+    "first_name": "Gunner",
+    "last_name": "Olzewski",
+    "number": "904-555-8080",
+    "personal_contact": false,
+    "work_contact": true,
+    "notes": "Tough as nails."
+  },
+  {
+    "first_name": "Damien",
+    "last_name": "Harris",
+    "number": "904-555-3737",
+    "personal_contact": false,
+    "work_contact": true,
+    "notes": ""
+  },
+  {
+    "first_name": "Christian",
+    "last_name": "Barmore",
+    "number": "904-555-9090",
+    "personal_contact": false,
+    "work_contact": true,
+    "notes": "Talented rookie."
+  }
+]
