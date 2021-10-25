@@ -49,7 +49,7 @@ yellow: #eee978
     padding: 24px 10px 6px;
     background: linear-gradient(to right, #eee978, #ffb933);
     color: #564536;
-    font-weight: 700;
+    font-weight: 600;
   }
   .add-new-btn {
     border: 2px solid #564536;
