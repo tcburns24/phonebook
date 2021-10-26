@@ -3,14 +3,16 @@ export default {
   name: 'NewContactForm',
   data() {
     return {
-      first_name: '',
-      last_name: '',
-      number: '',
-      personal_or_work: 'personal',
-      notes: '',
+      newContact: {
+        first_name: '',
+        last_name: '',
+        number: '',
+        personal_or_work: 'personal',
+        notes: '',
+      },
       validations: {
-        hasFirstOrLast: () => this.first_name !== '' || this.last_name !== '',
-        numberTenDigits: () => this.number.length == 10,
+        hasFirstOrLast: () => this.newContact.first_name !== '' || this.newContact.last_name !== '',
+        numberTenDigits: () => this.newContact.number.length == 10,
       }
     }
   },
@@ -20,6 +22,9 @@ export default {
     },
     hideNewContactForm() {
       this.$emit('hideNewContactForm');
+    },
+    submit() {
+      this.$emit('submit', this.newContact);
     },
   },
   computed: {
@@ -96,27 +101,27 @@ yellow: #eee978
       <h2>Add New Contact</h2>
     </div>
     <div class="input-field">
-      <input type="text" placeholder="First Name" v-model="first_name" />
+      <input type="text" placeholder="First Name" v-model="newContact.first_name" />
     </div>
     <div class="input-field">
-      <input type="text" placeholder="Last Name" v-model="last_name" />
+      <input type="text" placeholder="Last Name" v-model="newContact.last_name" />
     </div>
     <div class="input-field">
-      <input type="text" placeholder="Phone Number" v-model="number" />
+      <input type="text" placeholder="Phone Number" v-model="newContact.number" />
     </div>
     <div class="input-field">
       <label for="personal_or_work">Personal or Work?  </label>
-      <select id="personal_or_work" name="personal_or_work">
+      <select id="personal_or_work" name="personal_or_work" v-model="newContact.personal_or_work">
         <option value="personal">Personal</option>
         <option value="work">Work</option>
       </select>
     </div>
     <div class="input-field">
-      <textarea placeholder="Notes" rows="4" v-model="notes" />
+      <textarea placeholder="Notes" rows="4" v-model="newContact.notes" />
     </div>
     <div class="btn-row input-field">
       <div class="btn cancel" @click="hideNewContactForm">Cancel</div>
-      <div class="btn submit">Submit</div>
+      <div class="btn submit" @click="submit">Submit</div>
     </div>
   </div>
 </template>

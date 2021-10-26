@@ -28,6 +28,9 @@ export default {
     hideNewContactForm() {
       this.newContactFormVisible = false;
     },
+    addContact(obj) {
+      this.contacts.push(obj);
+    },
   }
 }
 </script>
@@ -126,6 +129,7 @@ yellow: #eee978
       v-bind:class="{ 'show-form' : newContactFormVisible }"
       @showNewContactForm="showNewContactForm"
       @hideNewContactForm="hideNewContactForm"
+      @submit="addContact"
     />
   </div>
 </template>
