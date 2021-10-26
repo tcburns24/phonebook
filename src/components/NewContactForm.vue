@@ -37,17 +37,56 @@ yellow: #eee978
 -->
 <style>
   .container {
-    margin: auto;
-    height: 70%;
     width: 50%;
     position: fixed;
-    border: 4px solid #d04c34;
+    left: 25%;
+    top: 20%;
+    padding: 3% 0 3%;
+    border: 6px solid #d04c34;
     border-radius: 8px;
+    background: linear-gradient(to right bottom, #ffb933, #eee978);
+    color: #564536;
+  }
+  .input-field {
+    padding: 12px 8px 2px;
+    font-size: 18px;
+  }
+  .title-text {
+    color: #8b5e30;
+  }
+  .btn-row {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin: auto;
+  }
+  .btn {
+    flex: 1;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    width: 50%;
+    cursor: pointer;
+  }
+  .cancel {
+    background-color: grey;
+    margin-right: 6px;
+  }
+  .submit {
+    background-color: #d04c34;
+    margin-left: 6px;
+  }
+  input, textarea {
+    width: 70%;
   }
 </style>
 
 <template>
   <div class="container">
+    <div class="title-text">
+      <h2>Add New Contact</h2>
+    </div>
     <div class="input-field">
       <input type="text" placeholder="First Name" v-model="first_name" />
     </div>
@@ -58,14 +97,18 @@ yellow: #eee978
       <input type="text" placeholder="Phone Number" v-model="number" />
     </div>
     <div class="input-field">
-      <label for="personal_or_work">Personal or Work?</label>
+      <label for="personal_or_work">Personal or Work?  </label>
       <select id="personal_or_work" name="personal_or_work">
         <option value="personal">Personal</option>
         <option value="work">Work</option>
       </select>
     </div>
     <div class="input-field">
-      <input type="text" placeholder="Notes" v-model="notes" />
+      <textarea placeholder="Notes" rows="4" v-model="notes" />
+    </div>
+    <div class="btn-row input-field">
+      <div class="btn cancel">Cancel</div>
+      <div class="btn submit">Submit</div>
     </div>
   </div>
 </template>
