@@ -104,8 +104,8 @@ yellow: #eee978
       <span class="control-header flex3">#</span>
       <span class="control-header flex2">Type</span>
     </div>
-    <div v-for="(contact, index) in contacts" :key="index">
-      <ContactRow :infoObj="contact" :divider="index !== 0" />
+    <div v-for="(contact, index) in contacts" :key="contact.first_name">
+      <ContactRow :infoObj="contact" :divider="index !== 0" @deleteContact="deleteSingleContact(index)" />
     </div>
   </div>
 </template>

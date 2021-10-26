@@ -1,7 +1,7 @@
 <script>
 export default {
   name: 'ContactRow',
-  props: ['infoObj', 'divider', 'deleteFunc', 'selectFunc'],
+  props: ['infoObj', 'divider'],
   data() {
     return {
       selected: false,
@@ -15,6 +15,9 @@ export default {
   methods: {
     toggleSelection() {
       this.selected = !this.selected;
+    },
+    deleteContact() {
+      this.$emit('deleteContact');
     },
   }
 }
@@ -33,7 +36,7 @@ yellow: #eee978
     width: 100%;
     max-width: 875px;
     position: relative;
-    padding: 3px 3%;
+    padding: 12px 3%;
     display: flex;
     font-weight: 700;
     align-items: center;
@@ -64,7 +67,8 @@ yellow: #eee978
     justify-content: space-between;
   }
   .action-item {
-    padding: 0 2px;
+    padding: 0 3px;
+    cursor: pointer;
   }
   .action-item-img {
     height: 100%;
@@ -82,7 +86,7 @@ yellow: #eee978
       <div class="action-item">
         <img class="action-item-img" src="../assets/edit_icon.png" />
       </div>
-      <div class="action-item">
+      <div class="action-item" @click="deleteContact">
         <img class="action-item-img" src="../assets/delete_icon.png" />
       </div>
     </div>
