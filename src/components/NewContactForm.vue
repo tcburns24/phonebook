@@ -14,6 +14,14 @@ export default {
       }
     }
   },
+  methods: {
+    showNewContactForm() {
+      this.$emit('showNewContactForm');
+    },
+    hideNewContactForm() {
+      this.$emit('hideNewContactForm');
+    },
+  },
   computed: {
     isValid() {
       return this.validations.hasFirstOrLast && this.validations.numberTenDigits;
@@ -107,7 +115,7 @@ yellow: #eee978
       <textarea placeholder="Notes" rows="4" v-model="notes" />
     </div>
     <div class="btn-row input-field">
-      <div class="btn cancel">Cancel</div>
+      <div class="btn cancel" @click="hideNewContactForm">Cancel</div>
       <div class="btn submit">Submit</div>
     </div>
   </div>

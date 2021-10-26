@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       contacts: [],
+      newContactFormVisible: false,
     };
   },
   mounted() {
@@ -20,6 +21,12 @@ export default {
     },
     toggleSelect(index) {
       this.contacts[index].isSelected = !this.contacts[index].isSelected;
+    },
+    showNewContactForm() {
+      this.newContactFormVisible = true;
+    },
+    hideNewContactForm() {
+      this.newContactFormVisible = false;
     },
   }
 }
@@ -85,6 +92,12 @@ yellow: #eee978
   .flex3 {
     flex: 3;
   }
+  .new-contact-form {
+    display: none;
+  }
+  .show-form {
+    display: inline;
+  }
 </style>
 
 <template>
@@ -93,7 +106,7 @@ yellow: #eee978
       <div class="decoration">🎃</div>
       <div class="title">Phonebook</div>
       <div class="decoration">
-        <div class="add-new-btn">+</div>
+        <div class="add-new-btn" @click="showNewContactForm">+</div>
       </div>
     </div>
     <div class="control-row">
@@ -108,6 +121,11 @@ yellow: #eee978
     <div v-for="(contact, index) in contacts" :key="contact.number">
       <ContactRow :infoObj="contact" :divider="index !== 0" @deleteContact="deleteSingleContact(index)" />
     </div>
-    <NewContactForm />
+    <NewContactForm
+      class="new-contact-form"
+      v-bind:class="{ 'show-form' : newContactFormVisible }"
+      @showNewContactForm="showNewContactForm"
+      @hideNewContactForm="hideNewContactForm"
+    />
   </div>
 </template>
