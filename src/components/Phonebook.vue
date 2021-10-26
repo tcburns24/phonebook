@@ -26,7 +26,8 @@ yellow: #eee978
 -->
 <style>
   .header {
-    max-width: 100%;
+    max-width: 875px;
+    width: 100%;
     height: 105px;
     display: flex;
     padding: 0 3%;
@@ -48,11 +49,14 @@ yellow: #eee978
     position: relative;
     display: flex;
     justify-content: space-between;
-    max-width: 100%;
-    padding: 24px 10px 6px;
+    width: 100%;
+    max-width: 875px;
+    padding: 24px 3% 6px;
     background: linear-gradient(to right, #eee978, #ffb933);
     color: #564536;
     font-weight: 600;
+    text-align: start;
+    text-decoration: underline;
   }
   .add-new-btn {
     border: 2px solid #564536;
@@ -62,6 +66,15 @@ yellow: #eee978
     background: linear-gradient(to right bottom, #d04c34, #ffb933);
     line-height: 50px;
     cursor: pointer;
+  }
+  .flex1 {
+    flex: 1;
+  }
+  .flex2 {
+    flex: 2;
+  }
+  .flex3 {
+    flex: 3;
   }
 </style>
 
@@ -75,16 +88,16 @@ yellow: #eee978
       </div>
     </div>
     <div class="control-row">
-      <span>
+      <span class="control-header flex1">
         <input type="checkbox" />
       </span>
-      <span>Last</span>
-      <span>First</span>
-      <span>#</span>
-      <span>Type</span>
+      <span class="control-header flex2">Last</span>
+      <span class="control-header flex2">First</span>
+      <span class="control-header flex3">#</span>
+      <span class="control-header flex2">Type</span>
     </div>
     <div v-for="(contact, index) in contacts" :key="index">
-      <ContactRow :infoObj="contact" />
+      <ContactRow :infoObj="contact" :divider="index !== 0" />
     </div>
   </div>
 </template>
