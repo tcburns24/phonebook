@@ -5,7 +5,7 @@
     "number": "904-555-1010",
     "personal_or_work": "work",
     "notes": "Great QB. Strong arm, great decision maker.",
-    "selected": false
+    "isSelected": false
   },
   {
     "first_name": "Dont'a",
@@ -13,7 +13,7 @@
     "number": "904-555-5454",
     "personal_or_work": "work",
     "notes": "",
-    "selected": false
+    "isSelected": false
   },
   {
     "first_name": "Gunner",
@@ -21,7 +21,7 @@
     "number": "904-555-8080",
     "personal_or_work": "personal",
     "notes": "Tough as nails.",
-    "selected": false
+    "isSelected": false
   },
   {
     "first_name": "Damien",
@@ -29,7 +29,7 @@
     "number": "904-555-3737",
     "personal_or_work": "work",
     "notes": "",
-    "selected": false
+    "isSelected": false
   },
   {
     "first_name": "Christian",
@@ -37,6 +37,6 @@
     "number": "904-555-9090",
     "personal_or_work": "personal",
     "notes": "Talented rookie.",
-    "selected": false
+    "isSelected": false
   }
 ]

@@ -53,7 +53,7 @@ yellow: #eee978
 </style>
 
 <template>
-  <div class="contact-row" v-bind:class="{ 'bottom-divider' : hasDivider }">
+  <div class="contact-row" v-bind:class="{ 'bottom-divider' : hasDivider, 'selected' : infoObj.isSelected }">
     <span class="flex1"><input type="checkbox" /></span>
     <span class="contact-info flex2">{{ infoObj.last_name }}</span>
     <span class="contact-info flex2">{{ infoObj.first_name }}</span>

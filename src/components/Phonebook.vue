@@ -12,6 +12,11 @@ export default {
   },
   mounted() {
     this.contacts = JSON.parse(JSON.stringify(allContacts));
+  },
+  methods: {
+    deleteSingleContact(index) {
+      this.contacts.splice(index, 1);
+    },
   }
 }
 </script>
