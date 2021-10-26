@@ -1,7 +1,10 @@
 <script>
 import allContacts from "../contacts.json";
+import ContactRow from "./ContactRow";
 
 export default {
+  name: 'Phonebook',
+  components: { ContactRow },
   data() {
     return {
       contacts: [],
@@ -81,9 +84,7 @@ yellow: #eee978
       <span>Type</span>
     </div>
     <div v-for="(contact, index) in contacts" :key="index">
-      <ul>
-        <li>{{ contact.first_name }}</li>
-      </ul>
+      <ContactRow :infoObj="contact" />
     </div>
   </div>
 </template>
