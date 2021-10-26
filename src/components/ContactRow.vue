@@ -1,10 +1,10 @@
 <script>
 export default {
   name: 'ContactRow',
-  props: ['infoObj', 'divider'],
+  props: ['infoObj', 'divider', 'deleteFunc', 'selectFunc'],
   data() {
     return {
-      
+      selected: false,
     }
   },
   computed: {
@@ -12,6 +12,11 @@ export default {
       return this.divider == true;
     },
   },
+  methods: {
+    toggleSelection() {
+      this.selected = !this.selected;
+    },
+  }
 }
 </script>
 
@@ -50,14 +55,36 @@ yellow: #eee978
   .flex3 {
     flex: 3;
   }
+  .action-row {
+    position: absolute;
+    right: 38px;
+    display: flex;
+    height: 25px;
+    width: 30px;
+    justify-content: space-between;
+  }
+  .action-item {
+    padding: 0 2px;
+  }
+  .action-item-img {
+    height: 100%;
+  }
 </style>
 
 <template>
-  <div class="contact-row" v-bind:class="{ 'bottom-divider' : hasDivider, 'selected' : infoObj.isSelected }">
-    <span class="flex1"><input type="checkbox" /></span>
+  <div class="contact-row" v-bind:class="{ 'bottom-divider' : hasDivider, 'selected' : selected }">
+    <span class="flex1"><input type="checkbox" @click="toggleSelection" /></span>
     <span class="contact-info flex2">{{ infoObj.last_name }}</span>
     <span class="contact-info flex2">{{ infoObj.first_name }}</span>
     <span class="contact-info flex3">{{ infoObj.number }}</span>
     <span class="contact-info flex2">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
+    <div v-show="selected" class="action-row">
+      <div class="action-item">
+        <img class="action-item-img" src="../assets/edit_icon.png" />
+      </div>
+      <div class="action-item">
+        <img class="action-item-img" src="../assets/delete_icon.png" />
+      </div>
+    </div>
   </div>
 </template>

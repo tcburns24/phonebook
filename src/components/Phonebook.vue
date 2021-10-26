@@ -17,6 +17,9 @@ export default {
     deleteSingleContact(index) {
       this.contacts.splice(index, 1);
     },
+    toggleSelect(index) {
+      this.contacts[index].isSelected = !this.contacts[index].isSelected;
+    },
   }
 }
 </script>
