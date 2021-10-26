@@ -1,10 +1,11 @@
 <script>
 import allContacts from "../contacts.json";
 import ContactRow from "./ContactRow";
+import NewContactForm from "./NewContactForm";
 
 export default {
   name: 'Phonebook',
-  components: { ContactRow },
+  components: { ContactRow, NewContactForm },
   data() {
     return {
       contacts: [],
@@ -104,8 +105,9 @@ yellow: #eee978
       <span class="control-header flex3">#</span>
       <span class="control-header flex2">Type</span>
     </div>
-    <div v-for="(contact, index) in contacts" :key="contact.first_name">
+    <div v-for="(contact, index) in contacts" :key="contact.number">
       <ContactRow :infoObj="contact" :divider="index !== 0" @deleteContact="deleteSingleContact(index)" />
     </div>
+    <NewContactForm />
   </div>
 </template>
