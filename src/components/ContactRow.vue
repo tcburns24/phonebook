@@ -61,6 +61,12 @@ yellow: #eee978
     justify-content: space-between;
     text-align: start;
   }
+  .contact-info {
+    cursor: pointer;
+  }
+  .contact-info:hover {
+    text-decoration: underline;
+  }
   .bottom-divider {
     border-top: 1px solid #8b5e30;
   }
@@ -100,13 +106,13 @@ yellow: #eee978
     <span v-if="!editMode" class="contact-info flex2" @click="setIndex">{{ infoObj.last_name }}</span>
     <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.last_name" /></div>
 
-    <span v-if="!editMode" class="contact-info flex2">{{ infoObj.first_name }}</span>
+    <span v-if="!editMode" class="contact-info flex2" @click="setIndex">{{ infoObj.first_name }}</span>
     <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.first_name" /></div>
 
-    <span v-if="!editMode" class="contact-info flex3">{{ infoObj.number }}</span>
+    <span v-if="!editMode" class="contact-info flex3" @click="setIndex">{{ infoObj.number }}</span>
     <div v-else class="contact-info flex3"><input type="text" v-model="updatedInfoObj.number" /></div>
 
-    <span v-if="!editMode" class="contact-info flex2">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
+    <span v-if="!editMode" class="contact-info flex2" @click="setIndex">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
     <div v-else class="contact-info flex2">
       <select id="personal_or_work" name="personal_or_work" v-model="updatedInfoObj.personal_or_work">
         <option value="personal">Personal</option>

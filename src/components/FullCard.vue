@@ -84,7 +84,10 @@ export default {
     <div class="title-text">
       <h2>{{ contactObj.first_name }} {{ contactObj.last_name }}</h2>
     </div>
-    
+    <div>
+      <h3>{{ contactObj.number }}</h3>
+    </div>
+    <div class="personal-work">{{ contactObj.personal_or_work }}</div>
     <div class="input-field">
       <textarea placeholder="Notes" rows="4" v-model="contactObj.notes" />
     </div>
