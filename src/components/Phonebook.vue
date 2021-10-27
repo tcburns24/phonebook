@@ -68,6 +68,8 @@ yellow: #eee978
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(to right, #8b5e30, #564536);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   .title {
     font-weight: 900;
@@ -125,7 +127,7 @@ yellow: #eee978
 </style>
 
 <template>
-  <div>
+  <div class="wrap">
     <div class="header">
       <div class="decoration">🎃</div>
       <div class="title">Phonebook</div>
