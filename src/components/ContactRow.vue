@@ -21,10 +21,18 @@ export default {
     deleteContact() {
       this.$emit('deleteContact');
     },
+    stripNumberDashes() {
+      this.updatedInfoObj.number = this.updatedInfoObj.number.slice(0, 3) + this.updatedInfoObj.number.slice(4, 7) + this.updatedInfoObj.number.slice(8);
+    },
+    formatNumber() {
+      this.updatedInfoObj.number = this.updatedInfoObj.number.slice(0, 3) + "-" + this.updatedInfoObj.number.slice(3, 6) + "-" + this.updatedInfoObj.number.slice(6);
+    },
     editContact() {
+      this.stripNumberDashes();
       this.editMode = true;
     },
     updateContact() {
+      this.formatNumber();
       this.editMode = false;
       this.$emit('updateContact', this.contactIndex, this.updatedInfoObj);
     },
@@ -63,6 +71,9 @@ yellow: #eee978
   }
   .contact-info {
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .contact-info:hover {
     text-decoration: underline;
@@ -110,7 +121,7 @@ yellow: #eee978
     <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.first_name" /></div>
 
     <span v-if="!editMode" class="contact-info flex3" @click="setIndex">{{ infoObj.number }}</span>
-    <div v-else class="contact-info flex3"><input type="text" v-model="updatedInfoObj.number" /></div>
+    <div v-else class="contact-info flex3"><input type="text" maxlength="10" v-model="updatedInfoObj.number" /></div>
 
     <span v-if="!editMode" class="contact-info flex2" @click="setIndex">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
     <div v-else class="contact-info flex2">
