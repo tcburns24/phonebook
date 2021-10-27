@@ -2,15 +2,18 @@
 import allContacts from "../contacts.json";
 import ContactRow from "./ContactRow";
 import NewContactForm from "./NewContactForm";
+import FullCard from "./FullCard";
 
 export default {
   name: 'Phonebook',
-  components: { ContactRow, NewContactForm },
+  components: { ContactRow, NewContactForm, FullCard },
   data() {
     return {
       contacts: [],
       newContactFormVisible: false,
       editContactFormVisible: false,
+      fullCardVisible: false,
+      currentIndex: 0,
     };
   },
   mounted() {
@@ -34,6 +37,13 @@ export default {
     },
     updateContact(index, obj) {
       this.contacts.splice(index, 1, obj);
+    },
+    setCurrentIndex(idx) {
+      this.currentIndex = idx;
+      this.fullCardVisible = true;
+    },
+    hideFullCard() {
+      this.fullCardVisible = false;
     },
   }
 }
@@ -106,6 +116,12 @@ yellow: #eee978
   .show-form {
     display: inline;
   }
+  .full-card {
+    display: none;
+  }
+  .show-full-card {
+    display: inline;
+  }
 </style>
 
 <template>
@@ -127,7 +143,14 @@ yellow: #eee978
       <span class="control-header flex2">Type</span>
     </div>
     <div v-for="(contact, index) in contacts" :key="contact.number">
-      <ContactRow :infoObj="contact" :divider="index !== 0" :contactIndex="index" @deleteContact="deleteSingleContact(index)" @updateContact="updateContact" />
+      <ContactRow
+        :infoObj="contact"
+        :divider="index !== 0"
+        :contactIndex="index"
+        @deleteContact="deleteSingleContact(index)"
+        @updateContact="updateContact"
+        @setCurrentIndex="setCurrentIndex"
+      />
     </div>
     <NewContactForm
       class="new-contact-form"
@@ -135,6 +158,12 @@ yellow: #eee978
       @showNewContactForm="showNewContactForm"
       @hideNewContactForm="hideNewContactForm"
       @submit="addContact"
+    />
+    <FullCard
+      class="full-card"
+      v-bind:class="{ 'show-full-card' : fullCardVisible }"
+      :contactObj="contacts[currentIndex]"
+      @hideFullCard="hideFullCard"
     />
   </div>
 </template>

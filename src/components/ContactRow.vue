@@ -28,13 +28,16 @@ export default {
       this.editMode = false;
       this.$emit('updateContact', this.contactIndex, this.updatedInfoObj);
     },
+    setIndex() {
+      this.$emit('setCurrentIndex', this.contactIndex);
+    },
   },
   mounted() {
     // copy infoObj to updatedInfoObj
     for (const property in this.infoObj) {
       this.updatedInfoObj[property] = this.infoObj[property];
     }
-  }
+  },
 }
 </script>
 
@@ -93,7 +96,8 @@ yellow: #eee978
 <template>
   <div class="contact-row" v-bind:class="{ 'bottom-divider' : hasDivider, 'selected' : selected }">
     <span class="flex1"><input type="checkbox" @click="toggleSelection" /></span>
-    <span v-if="!editMode" class="contact-info flex2">{{ infoObj.last_name }}</span>
+
+    <span v-if="!editMode" class="contact-info flex2" @click="setIndex">{{ infoObj.last_name }}</span>
     <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.last_name" /></div>
 
     <span v-if="!editMode" class="contact-info flex2">{{ infoObj.first_name }}</span>
@@ -103,7 +107,12 @@ yellow: #eee978
     <div v-else class="contact-info flex3"><input type="text" v-model="updatedInfoObj.number" /></div>
 
     <span v-if="!editMode" class="contact-info flex2">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
-    <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.personal_or_work" /></div>
+    <div v-else class="contact-info flex2">
+      <select id="personal_or_work" name="personal_or_work" v-model="updatedInfoObj.personal_or_work">
+        <option value="personal">Personal</option>
+        <option value="work">Work</option>
+      </select>
+    </div>
 
     <div v-show="selected" class="action-row">
       <div v-show="!editMode" class="action-item" @click="editContact">
