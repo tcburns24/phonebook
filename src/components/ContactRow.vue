@@ -1,10 +1,12 @@
 <script>
 export default {
   name: 'ContactRow',
-  props: ['infoObj', 'divider'],
+  props: ['infoObj', 'divider', 'contactIndex'],
   data() {
     return {
       selected: false,
+      editMode: false,
+      updatedInfoObj: {},
     }
   },
   computed: {
@@ -20,7 +22,17 @@ export default {
       this.$emit('deleteContact');
     },
     editContact() {
-      this.$emit('editContact');
+      this.editMode = true;
+    },
+    updateContact() {
+      this.editMode = false;
+      this.$emit('updateContact', this.contactIndex, this.updatedInfoObj);
+    },
+  },
+  mounted() {
+    // copy infoObj to updatedInfoObj
+    for (const property in this.infoObj) {
+      this.updatedInfoObj[property] = this.infoObj[property];
     }
   }
 }
@@ -81,13 +93,24 @@ yellow: #eee978
 <template>
   <div class="contact-row" v-bind:class="{ 'bottom-divider' : hasDivider, 'selected' : selected }">
     <span class="flex1"><input type="checkbox" @click="toggleSelection" /></span>
-    <span class="contact-info flex2">{{ infoObj.last_name }}</span>
-    <span class="contact-info flex2">{{ infoObj.first_name }}</span>
-    <span class="contact-info flex3">{{ infoObj.number }}</span>
-    <span class="contact-info flex2">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
+    <span v-if="!editMode" class="contact-info flex2">{{ infoObj.last_name }}</span>
+    <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.last_name" /></div>
+
+    <span v-if="!editMode" class="contact-info flex2">{{ infoObj.first_name }}</span>
+    <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.first_name" /></div>
+
+    <span v-if="!editMode" class="contact-info flex3">{{ infoObj.number }}</span>
+    <div v-else class="contact-info flex3"><input type="text" v-model="updatedInfoObj.number" /></div>
+
+    <span v-if="!editMode" class="contact-info flex2">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
+    <div v-else class="contact-info flex2"><input type="text" v-model="updatedInfoObj.personal_or_work" /></div>
+
     <div v-show="selected" class="action-row">
-      <div class="action-item" @click="editContact">
+      <div v-show="!editMode" class="action-item" @click="editContact">
         <img class="action-item-img" src="../assets/edit_icon.png" />
+      </div>
+      <div v-show="editMode" class="action-item" @click="updateContact">
+        <img class="action-item-img" src="../assets/checkmark.png" />
       </div>
       <div class="action-item" @click="deleteContact">
         <img class="action-item-img" src="../assets/delete_icon.png" />

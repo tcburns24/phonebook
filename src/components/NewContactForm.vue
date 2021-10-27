@@ -73,6 +73,7 @@ yellow: #eee978
     border-radius: 8px;
     background: linear-gradient(to right bottom, #ffb933, #eee978);
     color: #564536;
+    text-align: center;
   }
   .input-field {
     padding: 12px 8px 2px;

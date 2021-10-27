@@ -1,15 +1,15 @@
 <script>
 export default {
   name: 'EditContactForm',
-  props: ['contact'],
+  props: ['contact', 'contactIndex'],
   data() {
     return {
       updatedContact: {
-        // first_name: '',
-        // last_name: '',
-        // number: '',
-        // personal_or_work: 'personal',
-        // notes: '',
+        first_name: '',
+        last_name: '',
+        number: '',
+        personal_or_work: 'personal',
+        notes: '',
       },
       validations: {
         hasFirstOrLast: () => this.updatedContact.first_name !== '' || this.updatedContact.last_name !== '',
@@ -19,7 +19,11 @@ export default {
     }
   },
   mounted() {
-    this.updatedContact = JSON.parse(JSON.stringify(this.contact));
+    // copy the contact prop to updatedContact
+    for (const property in this.contact) {
+      this.updatedContact[property] = this.contact[property]
+    }
+
     this.$refs.numberInput.addEventListener('keydown', e => {
       let keyChar = String.fromCharCode(e.which || e.keyCode);
       if (!this.numberRegex.test(keyChar)) {
@@ -39,7 +43,7 @@ export default {
     },
     submit() {
       this.formatNumber();
-      this.$emit('submit', this.updatedContact);
+      this.$emit('submit', this.contactIndex, this.updatedContact);
       this.hideEditContactForm();
     },
   },

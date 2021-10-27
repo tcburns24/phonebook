@@ -2,11 +2,10 @@
 import allContacts from "../contacts.json";
 import ContactRow from "./ContactRow";
 import NewContactForm from "./NewContactForm";
-import EditContactForm from "./EditContactForm";
 
 export default {
   name: 'Phonebook',
-  components: { ContactRow, NewContactForm, EditContactForm },
+  components: { ContactRow, NewContactForm },
   data() {
     return {
       contacts: [],
@@ -27,17 +26,14 @@ export default {
     showNewContactForm() {
       this.newContactFormVisible = true;
     },
-    showEditContactForm() {
-      this.editContactFormVisible = true;
-    },
     hideNewContactForm() {
       this.newContactFormVisible = false;
     },
-    hideEditContactForm() {
-      this.editContactFormVisible = false;
-    },
     addContact(obj) {
       this.contacts.push(obj);
+    },
+    updateContact(index, obj) {
+      this.contacts.splice(index, 1, obj);
     },
   }
 }
@@ -131,7 +127,7 @@ yellow: #eee978
       <span class="control-header flex2">Type</span>
     </div>
     <div v-for="(contact, index) in contacts" :key="contact.number">
-      <ContactRow :infoObj="contact" :divider="index !== 0" @deleteContact="deleteSingleContact(index)" @editContact="showEditContactForm" />
+      <ContactRow :infoObj="contact" :divider="index !== 0" :contactIndex="index" @deleteContact="deleteSingleContact(index)" @updateContact="updateContact" />
     </div>
     <NewContactForm
       class="new-contact-form"
@@ -139,12 +135,6 @@ yellow: #eee978
       @showNewContactForm="showNewContactForm"
       @hideNewContactForm="hideNewContactForm"
       @submit="addContact"
-    />
-    <EditContactForm
-      class="new-contact-form"
-      v-bind:class="{ 'show-form' : editContactFormVisible }"
-      @showEditContactForm="showEditContactForm"
-      @hideEditContactForm="hideEditContactForm"
     />
   </div>
 </template>
