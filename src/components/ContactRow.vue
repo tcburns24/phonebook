@@ -19,6 +19,9 @@ export default {
     deleteContact() {
       this.$emit('deleteContact');
     },
+    editContact() {
+      this.$emit('editContact');
+    }
   }
 }
 </script>
@@ -83,7 +86,7 @@ yellow: #eee978
     <span class="contact-info flex3">{{ infoObj.number }}</span>
     <span class="contact-info flex2">{{ infoObj.personal_or_work == "work" ? "work" : "personal" }}</span>
     <div v-show="selected" class="action-row">
-      <div class="action-item">
+      <div class="action-item" @click="editContact">
         <img class="action-item-img" src="../assets/edit_icon.png" />
       </div>
       <div class="action-item" @click="deleteContact">
