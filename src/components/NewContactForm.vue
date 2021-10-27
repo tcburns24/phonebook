@@ -36,14 +36,21 @@ export default {
       this.newContact.number = this.newContact.number.slice(0, 3) + "-" + this.newContact.number.slice(3, 6) + "-" + this.newContact.number.slice(6);
     },
     submit() {
-      this.formatNumber();
-      this.$emit('submit', this.newContact);
-      this.hideNewContactForm();
+      if (!this.validations.hasFirstOrLast()) {
+        this.$refs.errors.innerText = 'Contacts must have a first or last name';
+      } else if (!this.validations.numberTenDigits()) {
+        this.$refs.errors.innerText = 'Phone numbers must be 10 digits';
+      } else {
+        this.$refs.errors.innerText = '';
+        this.formatNumber();
+        this.$emit('submit', this.newContact);
+        this.hideNewContactForm();
+      }
     },
   },
   computed: {
     isValid() {
-      return this.validations.hasFirstOrLast && this.validations.numberTenDigits;
+      return this.validations.hasFirstOrLast() && this.validations.numberTenDigits();
     },
     needsName() {
       return !this.validations.hasFirstOrLast;
@@ -108,6 +115,10 @@ yellow: #eee978
   input, textarea {
     width: 70%;
   }
+  .errors {
+    color: #d04c34;
+    font-weight: 700;
+  }
 </style>
 
 <template>
@@ -134,9 +145,10 @@ yellow: #eee978
     <div class="input-field">
       <textarea placeholder="Notes" rows="4" v-model="newContact.notes" />
     </div>
+    <div class="errors" ref="errors"></div>
     <div class="btn-row input-field">
-      <div class="btn cancel" @click="hideNewContactForm">Cancel</div>
-      <div class="btn submit" @click="submit">Submit</div>
+      <button class="btn cancel" @click="hideNewContactForm">Cancel</button>
+      <button class="btn submit" @click="submit">Submit</button>
     </div>
   </div>
 </template>
