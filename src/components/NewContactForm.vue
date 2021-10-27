@@ -13,8 +13,17 @@ export default {
       validations: {
         hasFirstOrLast: () => this.newContact.first_name !== '' || this.newContact.last_name !== '',
         numberTenDigits: () => this.newContact.number.length == 10,
-      }
+      },
+      numberRegex: /[0-9\b]/,
     }
+  },
+  mounted() {
+    this.$refs.numberInput.addEventListener('keydown', e => {
+      let keyChar = String.fromCharCode(e.which || e.keyCode);
+      if (!this.numberRegex.test(keyChar)) {
+        e.preventDefault();
+      }
+    });
   },
   methods: {
     showNewContactForm() {
@@ -23,8 +32,13 @@ export default {
     hideNewContactForm() {
       this.$emit('hideNewContactForm');
     },
+    formatNumber() {
+      this.newContact.number = this.newContact.number.slice(0, 3) + "-" + this.newContact.number.slice(3, 6) + "-" + this.newContact.number.slice(6);
+    },
     submit() {
+      this.formatNumber();
       this.$emit('submit', this.newContact);
+      this.hideNewContactForm();
     },
   },
   computed: {
@@ -107,7 +121,7 @@ yellow: #eee978
       <input type="text" placeholder="Last Name" v-model="newContact.last_name" />
     </div>
     <div class="input-field">
-      <input type="text" placeholder="Phone Number" v-model="newContact.number" />
+      <input type="text" ref="numberInput" maxlength="10" placeholder="Phone Number (digits only, no dashes)" v-model="newContact.number" />
     </div>
     <div class="input-field">
       <label for="personal_or_work">Personal or Work?  </label>
