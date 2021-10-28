@@ -14,6 +14,8 @@ export default {
       editContactFormVisible: false,
       fullCardVisible: false,
       currentIndex: 0,
+      lastNameAsc: false,
+      firstNameAsc: false,
     };
   },
   mounted() {
@@ -45,6 +47,17 @@ export default {
     hideFullCard() {
       this.fullCardVisible = false;
     },
+    // category arg must be string
+    alphabeticAscSort(category) {
+      this.contacts.sort(function(a, b) {
+        return (a[category] < b[category]) ? -1 : (a[category] > b[category]) ? 1 : 0;
+      });
+    },
+    alphabeticDescSort(category) {
+      this.contacts.sort(function(a, b) {
+        return (a[category] < b[category]) ? 1 : (a[category] > b[category]) ? -1 : 0;
+      });
+    },
   }
 }
 </script>
@@ -73,7 +86,6 @@ yellow: #eee978
   }
   .title {
     font-weight: 900;
-    color: var(--yellow);
     font-size: 24px;
     color: #eee978;
   }
@@ -124,6 +136,9 @@ yellow: #eee978
   .show-full-card {
     display: inline;
   }
+  .sort-icon {
+    cursor: pointer;
+  }
 </style>
 
 <template>
@@ -139,8 +154,16 @@ yellow: #eee978
       <span class="control-header flex1">
         <input type="checkbox" />
       </span>
-      <span class="control-header flex2">Last</span>
-      <span class="control-header flex2">First</span>
+      <span class="control-header flex2">
+        Last
+        <span class="sort-icon" v-show="!lastNameAsc" @click="alphabeticAscSort('last_name'); lastNameAsc=true;">▲</span>
+        <span class="sort-icon" v-show="lastNameAsc" @click="alphabeticDescSort('last_name'); lastNameAsc=false">▼</span>
+      </span>
+      <span class="control-header flex2">
+        First
+        <span class="sort-icon" v-show="!firstNameAsc" @click="alphabeticAscSort('first_name'); firstNameAsc=true;">▲</span>
+        <span class="sort-icon" v-show="firstNameAsc" @click="alphabeticDescSort('first_name'); firstNameAsc=false">▼</span>
+      </span>
       <span class="control-header flex3">#</span>
       <span class="control-header flex2">Type</span>
     </div>
