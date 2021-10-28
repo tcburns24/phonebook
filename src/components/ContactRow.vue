@@ -19,7 +19,7 @@ export default {
     },
     isMobileWidth() {
       return this.window.width < 716;
-    }
+    },
   },
   methods: {
     handleResize() {

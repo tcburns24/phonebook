@@ -14,8 +14,19 @@ export default {
         hasFirstOrLast: () => this.newContact.first_name !== '' || this.newContact.last_name !== '',
         numberTenDigits: () => this.newContact.number.length == 10,
       },
+      window: {
+        height: 0,
+        width: 0,
+      },
       numberRegex: /[0-9\b]/,
     }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize);
   },
   mounted() {
     this.$refs.numberInput.addEventListener('keydown', e => {
@@ -26,6 +37,10 @@ export default {
     });
   },
   methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
     showNewContactForm() {
       this.$emit('showNewContactForm');
     },
@@ -50,6 +65,9 @@ export default {
     },
   },
   computed: {
+    isMobileWidth() {
+      return this.window.width < 716;
+    },
     isValid() {
       return this.validations.hasFirstOrLast() && this.validations.numberTenDigits();
     },
@@ -76,6 +94,18 @@ yellow: #eee978
     position: fixed;
     left: 25%;
     top: 20%;
+    padding: 3% 0 3%;
+    border: 6px solid #d04c34;
+    border-radius: 8px;
+    background: linear-gradient(to right bottom, #ffb933, #eee978);
+    color: #564536;
+    text-align: center;
+  }
+  .mobile {
+    width: 90%;
+    position: fixed;
+    left: 2%;
+    top: 10%;
     padding: 3% 0 3%;
     border: 6px solid #d04c34;
     border-radius: 8px;
@@ -123,7 +153,7 @@ yellow: #eee978
 </style>
 
 <template>
-  <div class="container">
+  <div v-bind:class="{ 'mobile' : isMobileWidth, 'container' : !isMobileWidth }">
     <div class="title-text">
       <h2>Add New Contact</h2>
     </div>
