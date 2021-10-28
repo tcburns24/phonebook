@@ -122,6 +122,14 @@ yellow: #eee978
   .flex3 {
     flex: 3;
   }
+  .flex-group2 {
+    flex: 2 2 350px;
+    display: flex;
+  }
+  .flex-group3 {
+    flex: 3 3 350px;
+    display: flex;
+  }
   .new-contact-form {
     display: none;
   }
@@ -167,21 +175,26 @@ yellow: #eee978
       </div>
     </div>
     <div class="control-row">
-      <span class="control-header flex1 invisible">
-        <input type="checkbox" />
-      </span>
-      <span class="control-header flex2">
-        Last
-        <span class="sort-icon" v-show="!lastNameAsc" @click="alphabeticAscSort('last_name'); lastNameAsc=true;">▲</span>
-        <span class="sort-icon" v-show="lastNameAsc" @click="alphabeticDescSort('last_name'); lastNameAsc=false">▼</span>
-      </span>
-      <span class="control-header flex2">
-        First
-        <span class="sort-icon" v-show="!firstNameAsc" @click="alphabeticAscSort('first_name'); firstNameAsc=true;">▲</span>
-        <span class="sort-icon" v-show="firstNameAsc" @click="alphabeticDescSort('first_name'); firstNameAsc=false">▼</span>
-      </span>
-      <span class="control-header flex3">#</span>
-      <span class="control-header flex2">Type</span>
+      <div class="flex-group2">
+        <span class="control-header flex1 invisible">
+          <input type="checkbox" />
+        </span>
+        <span class="control-header flex2">
+          Last
+          <span class="sort-icon" v-show="!lastNameAsc" @click="alphabeticAscSort('last_name'); lastNameAsc=true;">▲</span>
+          <span class="sort-icon" v-show="lastNameAsc" @click="alphabeticDescSort('last_name'); lastNameAsc=false">▼</span>
+        </span>
+        <span class="control-header flex2">
+          First
+          <span class="sort-icon" v-show="!firstNameAsc" @click="alphabeticAscSort('first_name'); firstNameAsc=true;">▲</span>
+          <span class="sort-icon" v-show="firstNameAsc" @click="alphabeticDescSort('first_name'); firstNameAsc=false">▼</span>
+        </span>
+      </div>
+      <div class="flex-group3">
+        <span class="control-header flex3">#</span>
+        <span class="control-header flex2">Type</span>
+        <span class="control-header flex1">Actions</span>
+      </div>
     </div>
     <div v-for="(contact, index) in contacts" :key="contact.number">
       <ContactRow
