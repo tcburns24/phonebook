@@ -30,6 +30,7 @@ export default {
       this.$emit('showNewContactForm');
     },
     hideNewContactForm() {
+      this.$refs.errors.innerText = '';
       this.$emit('hideNewContactForm');
     },
     formatNumber() {

@@ -60,9 +60,8 @@ yellow: #eee978
 <style scoped>
   .contact-row {
     width: 100%;
-    max-width: 875px;
     position: relative;
-    padding: 12px 3%;
+    padding: 12px 0;
     display: flex;
     font-weight: 700;
     align-items: center;

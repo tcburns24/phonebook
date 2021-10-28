@@ -72,11 +72,9 @@ yellow: #eee978
 -->
 <style>
   .header {
-    max-width: 875px;
     width: 100%;
     height: 105px;
     display: flex;
-    padding: 0 3%;
     position: relative;
     align-items: center;
     justify-content: space-between;
@@ -91,14 +89,14 @@ yellow: #eee978
   }
   .decoration {
     font-size: 30px;
+    margin: 0 40px
   }
   .control-row {
     position: relative;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 875px;
-    padding: 24px 3% 6px;
+    padding: 24px 0 6px;
     background: linear-gradient(to right, #eee978, #ffb933);
     color: #564536;
     font-weight: 600;
@@ -139,6 +137,24 @@ yellow: #eee978
   .sort-icon {
     cursor: pointer;
   }
+  .invisible {
+    opacity: 0.0;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to left, #564536, #8b5e30);
+    height: 85px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  .footer-text {
+    margin: auto;
+    color: white;
+    font-weight: 700;
+    margin: 10px;
+  }
 </style>
 
 <template>
@@ -151,7 +167,7 @@ yellow: #eee978
       </div>
     </div>
     <div class="control-row">
-      <span class="control-header flex1">
+      <span class="control-header flex1 invisible">
         <input type="checkbox" />
       </span>
       <span class="control-header flex2">
@@ -190,5 +206,13 @@ yellow: #eee978
       :contactObj="contacts[currentIndex]"
       @hideFullCard="hideFullCard"
     />
+    <div class="footer">
+      <div class="footer-text">
+        <p>Crossbeam Frontend Take Home Test</p>
+        <p>
+          <a href="https://github.com/tcburns24/phonebook">Github Repo</a>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
